@@ -8,8 +8,11 @@ st_crs(las)
 st_crs(las) <- 32632
 ```
 
-Classe	Significato
-2	      ground
-3–5	    vegetazione
-6	      building
-9      	water
+| Classe | Significato |
+|---|---|
+| 2 | Ground |
+| 3 | Low vegetation |
+| 4 | Medium vegetation |
+| 5 | High vegetation |
+| 6 | Building |
+| 9 | Water |
