@@ -99,9 +99,11 @@ hist(filter_ground(nlas)$Z, breaks = seq(-0.6, 0.6, 0.01),
 
 #Digital Surface Model 
 #and Canopy Height model
+```r
 LASfile <- system.file("extdata", "MixedConifer.laz", package ="lidR")
 las <- readLAS(LASfile)
 plot(las, size = 3, bg = "white")
+```
 
 ### CHM
 ```r
@@ -111,19 +113,13 @@ plot(chm, col = height.colors(25))
 
 ### DMS
 ```r
-LASfile <- system.file("extdata", "Topography.laz", package = "lidR")
-las2 <- readLAS(LASfile)
-las2 <- normalize_height(las2, algorithm = tin())
-chm <- rasterize_canopy(las2, res = 0.5, 
-                        algorithm = dsmtin(max_edge = 8))
-plot(chm, col = height.colors(25))
+las_norm <- normalize_height(las2, algorithm = tin())
+dms <- rasterize_canopy(las2, res = 0.5, algorithm = dsmtin(max_edge = 8))
+plot(dms, col = height.colors(25))
 ```
 
 ### Individual Tree Detection
 ```r
-LASfile <- system.file("extdata", "MixedConifer.laz", package="lidR")
-las <- readLAS(LASfile, select = "xyzr", filter = "-drop_z_below 0")
-
 chm <- rasterize_canopy(las, 0.5, pitfree(subcircle = 0.2))
 plot(las, bg = "white", size = 4)
 ```
@@ -200,6 +196,7 @@ d <- hexagon_metrics(las, m, area = 25)
 ```
 
 ## PLOT
+
 ``` r
 par(mfrow=c(2,2))
 plot(a, col = heat.colors(15), legend = FALSE)
