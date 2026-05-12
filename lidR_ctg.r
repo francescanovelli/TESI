@@ -15,7 +15,7 @@ ctg_ground <- classify_ground(ctg, algorithm = csf())
 dtm <- rasterize_terrain(ctg_ground, res = 1, algorithm = tin())
 
 # Normalizzo le altezze 
-normalize_height(ctg_ground, tin())
+ctg_norm <- normalize_height(ctg_ground, tin())
 
 # Creo un CHM
 chm <- rasterize_canopy(ctg_norm, res = 0.5, algorithm = pitfree(thresholds = c(0,2,5,10,15), max_edge = c(0,1)))
