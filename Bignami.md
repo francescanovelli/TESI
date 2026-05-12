@@ -103,49 +103,38 @@ LASfile <- system.file("extdata", "MixedConifer.laz", package ="lidR")
 las <- readLAS(LASfile)
 plot(las, size = 3, bg = "white")
 
-#CHM
+### CHM
+```r
 chm <- rasterize_canopy(las, res = 0.5, p2r(0.2, na.fill = tin()))
 plot(chm, col = height.colors(25))
+```
 
-#DMS
+### DMS
+```r
 LASfile <- system.file("extdata", "Topography.laz", package = "lidR")
 las2 <- readLAS(LASfile)
 las2 <- normalize_height(las2, algorithm = tin())
 chm <- rasterize_canopy(las2, res = 0.5, 
                         algorithm = dsmtin(max_edge = 8))
 plot(chm, col = height.colors(25))
+```
 
-
-#Individual Tree Detection
+### Individual Tree Detection
+```r
 LASfile <- system.file("extdata", "MixedConifer.laz", package="lidR")
 las <- readLAS(LASfile, select = "xyzr", filter = "-drop_z_below 0")
 
 chm <- rasterize_canopy(las, 0.5, pitfree(subcircle = 0.2))
 plot(las, bg = "white", size = 4)
+```
 
-#Local Maximum Filter 
+### Local Maximum Filter
+```r
 ttops <- locate_trees(las, lmf(ws = 7))
 plot(chm, col = height.colors(50))
 plot(sf::st_geometry(ttops), add = TRUE, pch = 3)
 x <- plot(las, bg = "white", size = 4)
 add_treetops3d(x, ttops)
-```
-
-### Densità
-``` r 
-las_seg <- segment_trees(las, li2012(R = 3, speed_up = 5))
-n_trees <- length(unique(las_seg$treeID))
-area_ha <- (area(las_seg)/10000) 
-density <- n_trees / area_ha
-density
-```
-
-### Altezza max e Diametro
-```r
-tree_heights <- tapply(las_seg$Z, las_seg$treeID, max)
-summary(tree_heights)
-DBH <- 0.5 * tree_heights
-summary(DBH)
 ```
 
 ### Individual Tree Segmentation
@@ -161,12 +150,23 @@ posso poi estrarre un singolo albero
 tree67 <- filter_poi(las, treeID == 67)
 plot(tree67, size = 8, bg = "white")
 ```
-Metriche della chioma
+
+### Altezza max e Diametro
 ```r
-crowns <- crown_metrics(las, func = .stdtreemetrics, geom = "convex")
-plot(crowns["convhull_area"], main = "Crown area")
+tree_heights <- tapply(las_seg$Z, las_seg$treeID, max)
+summary(tree_heights)
+DBH <- 0.5 * tree_heights
+summary(DBH)
 ```
 
+### Densità
+``` r 
+las_seg <- segment_trees(las, li2012(R = 3, speed_up = 5))
+n_trees <- length(unique(las_seg$treeID))
+area_ha <- (area(las_seg)/10000) 
+density <- n_trees / area_ha
+density
+```
 
 # METRICHE
 ``` r
@@ -180,6 +180,12 @@ cloud_metrics(las, func = .stdmetrics)
 pixel_metrics(las, func = .stdmetrics)
 tree_metrics(las, func = .stdmetrics)
 voxel_metrics(las, func = .stdmetrics)
+```
+
+Metriche della chioma
+```r
+crowns <- crown_metrics(las, func = .stdtreemetrics, geom = "convex")
+plot(crowns["convhull_area"], main = "Crown area")
 ```
 
 Definisco la metrica da calcolare e applico a diversi metodi la metrica
