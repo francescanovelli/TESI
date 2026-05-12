@@ -4,7 +4,8 @@ las <- readLAS(LASfile)
 
 # Classifico il terreno 
 ground <- classify_ground(las, csf())
-#oppure
+
+#oppure posso filatrare per terreno già classificato
 ground <- filter_poi(las, Classification == 2)
 
 # Creo un DTM
