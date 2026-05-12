@@ -154,14 +154,13 @@ plot(tree67, size = 8, bg = "white")
 ### Altezza max e Diametro
 ```r
 tree_heights <- tapply(las_seg$Z, las_seg$treeID, max)
-summary(tree_heights)
+
 DBH <- 0.5 * tree_heights
 summary(DBH)
 ```
 
 ### Densità
 ``` r 
-las_seg <- segment_trees(las, li2012(R = 3, speed_up = 5))
 n_trees <- length(unique(las_seg$treeID))
 area_ha <- (area(las_seg)/10000) 
 density <- n_trees / area_ha
