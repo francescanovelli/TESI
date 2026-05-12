@@ -133,6 +133,8 @@ plot(las, bg = "white", size = 4)
 ttops <- locate_trees(las, lmf(ws = 7))
 plot(chm, col = height.colors(50))
 plot(sf::st_geometry(ttops), add = TRUE, pch = 3)
+
+# per plottarlo sull'immagine 3D
 x <- plot(las, bg = "white", size = 4)
 add_treetops3d(x, ttops)
 ```
