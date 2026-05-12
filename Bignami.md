@@ -129,33 +129,40 @@ plot(chm, col = height.colors(50))
 plot(sf::st_geometry(ttops), add = TRUE, pch = 3)
 x <- plot(las, bg = "white", size = 4)
 add_treetops3d(x, ttops)
+```
 
-
-#DENSITà
+### Densità
+``` r 
 las_seg <- segment_trees(las, li2012(R = 3, speed_up = 5))
 n_trees <- length(unique(las_seg$treeID))
 area_ha <- (area(las_seg)/10000) 
 density <- n_trees / area_ha
 density
+```
 
-#ALTEZZA MAX e DIAMETRO
+### Altezza max e Diametro
+```r
 tree_heights <- tapply(las_seg$Z, las_seg$treeID, max)
 summary(tree_heights)
 DBH <- 0.5 * tree_heights
 summary(DBH)
+```
 
-#Individual Tree Segmentation
-#nel primo passaggio creo ogni singolo albero
-#nel secondo passaggio divido la foresta
+### Individual Tree Segmentation
+nel primo passaggio creo ogni singolo albero
+nel secondo passaggio divido la foresta
+```r
 algo <- dalponte2016(chm, ttops)
 las_seg <- segment_trees(las, algo)
 plot(las_seg, bg = "white", size = 4, color = "treeID") 
-
-# posso poi estrarre un singolo albero
+```
+posso poi estrarre un singolo albero
+```r
 tree67 <- filter_poi(las, treeID == 67)
 plot(tree67, size = 8, bg = "white")
-
-# metriche della chioma
+```
+Metriche della chioma
+```r
 crowns <- crown_metrics(las, func = .stdtreemetrics, geom = "convex")
 plot(crowns["convhull_area"], main = "Crown area")
 ```
