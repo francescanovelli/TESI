@@ -90,7 +90,8 @@ plot(gnd, size = 3, bg = "white")
 ci sono diversi algoritmi utilizzabili per creare un DTM
 ```r
 dtm_tin <- rasterize_terrain(las, res = 1, algorithm = tin())
-plot_dtm3d(dtm_tin, bg = "white") 
+plot_dtm3d(dtm_tin, bg = "white")
+
 dtm_idw <- rasterize_terrain(las, algorithm = knnidw(k = 10L, p = 2))
 plot_dtm3d(dtm_idw, bg = "white")
 ```
