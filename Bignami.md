@@ -14,7 +14,7 @@ Controllo se il file `.las` funziona correttamente
 las_check(las)
 ```
 
-DIVIDO DUE CLASSI USANDO IL FILTRO POI LE PLOTTO INSIEME AGGIUNGENDO L'UNO ALL'ALTRO
+Divido le due classi usando un filtro poi le plotto insieme aggingiendo l'uno all'altro
 ``` r
 nonveg <- filter_poi(las, Classification != LASHIGHVEGETATION)
 veg <- filter_poi(las, Classification == LASHIGHVEGETATION)
