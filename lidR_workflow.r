@@ -34,10 +34,15 @@ algo <- dalponte2016(chm, ttops)
 las_seg <- segment_trees(las_norm, algo)
 plot(las_seg, color = "treeID")
 
+# Per indentificare un singolo albero
+treen <- filter_poi(las_seg, treeID == n)
 
 
-# Metriche
+# Metriche della nuvola
 metrics <- crown_metrics(crowns, func = ~list(zmax = max(Z), zmean = mean(Z), n = length(Z)), geom = "convex")
+
+# Metriche del singolo albero
+treen <- tree_metrics()
 
 # Densità
 n_trees = length(unique(las$seg$treeID))
