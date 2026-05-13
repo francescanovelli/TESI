@@ -1,4 +1,3 @@
-#WORK FLOW
 LASfile <- system.file("extdata", "MixedConifer.laz", package="lidR")
 las <- readLAS(LASfile)
 
