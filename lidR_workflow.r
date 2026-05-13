@@ -49,3 +49,7 @@ tree_heights <- tapplay(las_seg$Z, las_seg$treeID, max)
 
 # Diametro stimato
 dbh <- 0.5*tree_heights
+
+# Identifico la distanza tra punti vicini
+dst = knn_distance(las)
+plot(dst, color = "distance", breaks = "quantile", legend = TRUE)
