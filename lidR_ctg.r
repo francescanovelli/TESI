@@ -1,4 +1,5 @@
-ctg <- readLAScatalog()
+LASfile <- system.file("extdata","Megaplot.laz", package = "lidR")
+ctg <- readLAScatalog(LASfile)
 plot(ctg)
 
 # Chunk size, imposto la dimensione dei blocchi elaborati
