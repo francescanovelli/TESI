@@ -40,7 +40,7 @@ treen <- filter_poi(las_seg, treeID == n)
 metrics <- crown_metrics(crowns, func = ~list(zmax = max(Z), zmean = mean(Z), n = length(Z)), geom = "convex")
 
 # Metriche del singolo albero
-treen <- tree_metrics()
+tree <- tree_metrics(las, ~list(h_max = max(Z), h_mean = mean(Z), n_pts = length(Z)))
 
 # Densità
 n_trees = length(unique(las$seg$treeID))
