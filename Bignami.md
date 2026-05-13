@@ -25,12 +25,14 @@ plot(veg, add = x)
 ```
 
 ###   RENDERING 3D AVANZATO
-Localizzo le cime degli alberi
+Localizzo le cime degli alberi e le aggiungo ad un plot 3D
 
 ```  r 
 ttops <- locate_trees(las, lmf(ws = 5)) 
-offsets <- plot(las, bg = "white", size = 3)
-add_treetops3d(offsets, ttops)
+
+x <- plot(las, color = "Classification")
+add_dtm3d(x, dtm)
+add_treetops3d(x, ttops)
 ```
 
 Estraggo le coordinate delle punte
@@ -48,6 +50,11 @@ tmp <- numeric(2*length(z))
 tmp[2*1:length(z)] <- z
 z <- tmp
 M <- cbind(x,y,z)
+```
+Si può anche fare con i `voxels`
+```r
+voxels = voxel_metrics(lidar, list(Imean = mean(Intensity)), res = 5)
+plot(voxels, color = "Imean", colorPalette = heat.colors(50), trim=60, legend = TRUE)
 ```
 
 ### Display lines
@@ -149,22 +156,6 @@ tree67 <- filter_poi(las, treeID == 67)
 plot(tree67, size = 8, bg = "white")
 ```
 
-### Altezza max e Diametro
-```r
-tree_heights <- tapply(las_seg$Z, las_seg$treeID, max)
-
-DBH <- 0.5 * tree_heights
-summary(DBH)
-```
-
-### Densità
-``` r 
-n_trees <- length(unique(las_seg$treeID))
-area_ha <- (area(las_seg)/10000) 
-density <- n_trees / area_ha
-density
-```
-
 # METRICHE
 ``` r
 LASfile <- system.file("extdata", "MixedConifer.laz", package ="lidR")
@@ -179,10 +170,26 @@ tree_metrics(las, func = .stdmetrics)
 voxel_metrics(las, func = .stdmetrics)
 ```
 
-Metriche della chioma
+### Metriche della chioma
 ```r
 crowns <- crown_metrics(las, func = .stdtreemetrics, geom = "convex")
 plot(crowns["convhull_area"], main = "Crown area")
+```
+
+### Altezza max e Diametro
+```r
+tree_heights <- tapply(las_seg$Z, las_seg$treeID, max)
+
+DBH <- 0.5 * tree_heights
+summary(DBH)
+```
+
+### Densità
+``` r 
+n_trees <- length(unique(las_seg$treeID))
+area_ha <- (area(las_seg)/10000) 
+density <- n_trees / area_ha
+density
 ```
 
 Definisco la metrica da calcolare e applico a diversi metodi la metrica
@@ -203,4 +210,23 @@ plot(a, col = heat.colors(15), legend = FALSE)
 plot(b["avgI"], pal = heat.colors, pch = 19, cex = 1, axes = TRUE, key.pos = NULL, reset = FALSE)
 plot(c["avgI"], pal = heat.colors, axes = TRUE, key.pos = NULL, reset = FALSE)
 plot(d["avgI"], pal = heat.colors, axes = TRUE, key.pos = NULL, reset = FALSE)
+```
+
+### Unisco due tile
+```r
+LASfile4 <- system.file("extdata", "Megaplot.laz", package="lidR")
+shp <- system.file("extdata", "lake_polygons_UTM17.shp", package = "lidR")
+frt <- readLAS(LASfile4, filter = "-keep_random_fraction 0.1")
+lakes <- sf::st_read(shp, quiet = TRUE)
+
+frt <- merge_spatial(frt, lakes, "inlakes")
+names(frt)
+```
+
+Nel primo ho eliminato i punti del lago mentre nel secondo ho eliminato la foresta
+```r
+lakes <- filter_poi(frt, inlakes == TRUE)
+forest <- filter_poi(frt, inlakes == FALSE)
+plot(forest) 
+plot(lakes)
 ```
