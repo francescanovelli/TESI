@@ -20,7 +20,7 @@ plot(las, color= "Z")
 plot(las, color = "Intensity")
 ``` 
 
-Filtro per punti >10m
+Filtro per punti > 20m
 ```r
 las_high <- filter_poi(las, Z > 20)
 plot(las_high, color = "Z")
@@ -69,26 +69,32 @@ length(unique(tree$treeID))
 
 tree16 <- filter_poi(las, treeID == 16)
 plot(tree16)
+```
+
+Metriche forestali
+```r
+cloud_metrics(las_norm,.stdmetrics_z)
 ``` 
 
-_________________________________________________________________________________________________
-# creo un CTG
-LASfile <- system.file("extdata","Megaplot.laz",
-                       package = "lidR")
-
-ctg <- readLAScatalog(LASfile)
-plot(ctg)
-opt_chunk_size(ctg) <- 250
-dtm_ctg <- rasterize_terrain(ctg, res = 1,
-                             algorithm = tin())
-#metriche forestali
-cloud_metrics(las_norm,.stdmetrics_z)
-
-#mappa altezza media
+Mappa altezza media
+```r
 metrics <- pixel_metrics(las_norm, ~mean(Z), res = 10)
-plot(metrics,
-     axes = TRUE,
+plot(metrics, axes = TRUE,
      xlab = "Longitudine",
      ylab = "Latitudine",
      main = "Altezza media",
      col = terrain.colors(50))
+``` 
+_________________________________________________________________________________________________
+### Creo un CTG
+
+```r
+LASfile <- system.file("extdata","Megaplot.laz",package = "lidR")
+ctg <- readLAScatalog(LASfile)
+plot(ctg)
+```
+Sistemo il chunk size e creo un dtm
+```r
+opt_chunk_size(ctg) <- 250
+dtm_ctg <- rasterize_terrain(ctg, res = 1, algorithm = tin())
+```
