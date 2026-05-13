@@ -22,8 +22,12 @@ plot(chm)
 
 # Individuo i songoli alberi
 ttops <- locate_trees(chm, lmf(ws = 5))
+
 plot(chm)
 plot(sf::st_geometry(ttops), add = TRUE, col = "red")
+
+# per plottarli in 3D
+plot(las) |> add_treetops3d(ttops)
 
 # Segmento le chiome
 algo <- dalponte2016(chm, ttops)
