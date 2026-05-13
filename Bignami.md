@@ -19,8 +19,7 @@ Divido le due classi usando un filtro poi le plotto insieme aggingiendo l'uno al
 nonveg <- filter_poi(las, Classification != LASHIGHVEGETATION)
 veg <- filter_poi(las, Classification == LASHIGHVEGETATION)
 
-x <- plot(nonveg, color = "Classification",
-          bg = "white", size = 3)
+x <- plot(nonveg, color = "Classification", bg = "white", size = 3)
 plot(veg, add = x)
 ```
 
