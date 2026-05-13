@@ -61,7 +61,7 @@ vox <- voxelize_points(las, 6)
 plot(vox, voxel = TRUE, bg = "white", legend = TRUE)
 ```
 
-#creo dei transetti e poi faccio un grafico con ggplot
+creo dei transetti e poi faccio un grafico con ggplot
 ```r
 p1 <- c(273457, 5274357)
 p2 <- c(273542, 5274542)
@@ -80,12 +80,9 @@ gnd <- filter_ground(las)
 plot(gnd, size = 3, bg = "white") 
 ```
 
-### creo un DTM
+### DTM
+ci sono diversi algoritmi utilizzabili per creare un DTM
 ```r
-LASfile <- system.file("extdata", "Topography.laz", package="lidR")
-las <- readLAS(LASfile, select = "xyzc")
-plot(las, size = 3, bg = "white")
-
 dtm_tin <- rasterize_terrain(las, res = 1, algorithm = tin())
 plot_dtm3d(dtm_tin, bg = "white") 
 dtm_idw <- rasterize_terrain(las, algorithm = knnidw(k = 10L, p = 2))
