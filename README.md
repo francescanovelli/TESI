@@ -1,10 +1,9 @@
 # TESI
 This repo is related to the thesis in lidR at UniBZ
 
-cose importanti da controllare:
+Cose importanti da controllare: l'EPSG se non è presente lo si assegna
 ``` r
 st_crs(las)
-# se non è presente l'EPSG lo si assegna
 st_crs(las) <- 25832
 ```
 
