@@ -5,7 +5,7 @@ cose importanti da controllare:
 ``` r
 st_crs(las)
 # se non è presente l'EPSG lo si assegna
-st_crs(las) <- 32632
+st_crs(las) <- 25832
 ```
 
 | Classe | Significato |
