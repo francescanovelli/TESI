@@ -230,3 +230,12 @@ forest <- filter_poi(frt, inlakes == FALSE)
 plot(forest) 
 plot(lakes)
 ```
+
+Divido gli alberi tra di loro anche in base alle geometrie
+```r
+las <- segment_shapes(las, shp_plane(k = 15), "Coplanar")
+plot(las, color = "Coplanar")
+
+las <- segment_trees(las, li2012(R = 3, speed_up = 5))
+plot(las, color = "treeID")
+```
