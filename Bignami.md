@@ -4,7 +4,6 @@ library(lidRviewer)
 library(gstat)
 library(lidR)
 
-# file di esempio
 LASfile <- system.file("extdata", "Megaplot.laz", package="lidR")
 las <- readLAS(LASfile, filter = "-keep_random_fraction 0.5")
 ``` 
