@@ -1,5 +1,4 @@
 ctg <- readLAScatalog()
-print(ctg)
 plot(ctg)
 
 # Chunk size, imposto la dimensione dei blocchi elaborati
@@ -7,6 +6,17 @@ opt_chunk_size(ctg) <- 250
 
 # Buffer, fondamentale per evitare edge effects
 opt_chunk_buffer(ctg) <- 30
+
+# Allinemento
+opt_chunk_alignment(ctg) <- c(1000, 1000)
+
+# Plotto per controllare
+plot(ctg, chunk = TRUE)
+
+# Posso anche selezionare o filtrare solo per certe caratteristiche
+opt_select(ctg) <- "xyz"
+LAS <- clip_circle(ctg, 273500, 5274500, 10)
+opt_filter(ctg) <- "-keep_first -drop_z_below 2"
 
 # Classifico il terreno
 ctg_ground <- classify_ground(ctg, algorithm = csf())
