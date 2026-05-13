@@ -106,7 +106,7 @@ hist(filter_ground(nlas)$Z, breaks = seq(-0.6, 0.6, 0.01), main = "", xlab = "El
 ```
 
 ## Digital Surface Model (DSM) and Canopy Height model (CHM)
-per entrambi sarebbe meglio utilizzare il `nlas`
+per entrambi sarebbe meglio utilizzare il `nlas`, per il CHM è obbligatorio
 ```r
 #CHM
 chm <- rasterize_canopy(las, res = 0.5, p2r(0.2, na.fill = tin()))
@@ -137,8 +137,7 @@ add_treetops3d(x, ttops)
 ```
 
 ### Individual Tree Segmentation
-nel primo passaggio creo ogni singolo albero
-nel secondo passaggio divido la foresta
+nel primo passaggio creo ogni singolo albero, nel secondo passaggio divido la foresta
 ```r
 algo <- dalponte2016(chm, ttops)
 las_seg <- segment_trees(las, algo)
