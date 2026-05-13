@@ -80,7 +80,7 @@ gnd <- filter_ground(las)
 plot(gnd, size = 3, bg = "white") 
 ```
 
-### DTM
+## DTM
 ci sono diversi algoritmi utilizzabili per creare un DTM
 ```r
 dtm_tin <- rasterize_terrain(las, res = 1, algorithm = tin())
@@ -89,8 +89,7 @@ dtm_idw <- rasterize_terrain(las, algorithm = knnidw(k = 10L, p = 2))
 plot_dtm3d(dtm_idw, bg = "white")
 ```
 
-Utilizzo il DTM per normalizzare le altezze
-Uso un istogramma per vedere se la normalizzazione ha funzionato
+Utilizzo il DTM per normalizzare le altezze, poi uso un istogramma per vedere se la normalizzazione ha funzionato
 ```r
 dtm <- rasterize_terrain(las, 1, knnidw())
 nlas <- las - dtm
@@ -106,7 +105,8 @@ nlas <- normalize_height(las, knnidw())
 hist(filter_ground(nlas)$Z, breaks = seq(-0.6, 0.6, 0.01), main = "", xlab = "Elevation")
 ```
 
-# Digital Surface Model (DSM) and Canopy Height model (CHM)
+## Digital Surface Model (DSM) and Canopy Height model (CHM)
+per entrambi sarebbe meglio utilizzare il `nlas`
 ```r
 #CHM
 chm <- rasterize_canopy(las, res = 0.5, p2r(0.2, na.fill = tin()))
@@ -115,7 +115,6 @@ plot(chm, col = height.colors(25))
 
 ```r
 # DMS
-las_norm <- normalize_height(las2, algorithm = tin())
 dms <- rasterize_canopy(nlas, res = 0.5, algorithm = dsmtin(max_edge = 8))
 plot(dms, col = height.colors(25))
 ```
