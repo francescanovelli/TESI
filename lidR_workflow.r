@@ -48,7 +48,7 @@ area = (area(las_seg)/1000)
 density = n_trees/area
 
 # Altezza massima
-tree_heights <- tapplay(las_seg$Z, las_seg$treeID, max)
+tree_heights <- tapply(las_seg$Z, las_seg$treeID, max)
 
 # Diametro stimato
 dbh <- 0.5*tree_heights
