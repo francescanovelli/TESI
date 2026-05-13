@@ -16,12 +16,11 @@ las_norm <- normalize_height(las, dtm)
 plot(las_norm, color = "Z") # Z >= 0 per rimuovere valori negativi
 
 # Creo una CHM
-chm <- rasterize_canopy( las_norm, res = 0.5, algorithm = p2r())
+chm <- rasterize_canopy(las_norm, res = 0.5, algorithm = p2r())
 plot(chm)
 
 # Individuo i songoli alberi
 ttops <- locate_trees(chm, lmf(ws = 5))
-
 plot(chm)
 plot(sf::st_geometry(ttops), add = TRUE, col = "red")
 
