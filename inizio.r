@@ -19,3 +19,13 @@ clip1 <- clip_rectangle(
   ymax = 5101000)
 
 writeLAS(clip1, "zona1.laz")
+
+######################################################################################################################################
+# PER DARE IL TREE ID 
+algo <- dalponte2016(chm, ttops)
+las_seg <- segment_trees(las, algo)
+
+# METRICHE DA ESTRARRE PER OGNI ALBERO
+cloud_metrics(las, func = .stdmetrics)
+pixel_metrics(las, func = .stdmetrics)
+tree_metrics(las, func = .stdmetrics)
