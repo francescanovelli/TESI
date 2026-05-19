@@ -16,9 +16,6 @@ c <- decimate_points(c, random(5))
 ground_a <- filter_poi(a, Classification == 2)
 ground_b <- filter_poi(b, Classification == 2)
 ground_c <- filter_poi(c, Classification == 2)
-plot(ground_a, color = "Z")
-plot(ground_b, color = "Z")
-plot(ground_c, color = "Z")
 ``` 
 
 ### DTM
