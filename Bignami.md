@@ -164,9 +164,10 @@ las <- readLAS(LASfile)
 metrics <- cloud_metrics(las, func = .stdmetrics_z)
 str(head(metrics))
 
-cloud_metrics(las, func = .stdmetrics)
-pixel_metrics(las, func = .stdmetrics)
-tree_metrics(las, func = .stdmetrics)
+cloud_metrics(nlas, func = .stdmetrics)
+pixel_metrics(nlas, func = .stdmetrics, res = 20)
+tree_metrics(tree, func = .stdmetrics)
+crown_metrics(tree, func = .stdmetrics)
 voxel_metrics(las, func = .stdmetrics)
 ```
 
