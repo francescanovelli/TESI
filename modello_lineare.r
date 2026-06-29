@@ -21,3 +21,39 @@ ggplot(dati, aes(zmax, richness)) +
   labs(x = "Maximum canopy height (m)",
        y = "Species richness") +
   theme_classic(base_size = 12)
+
+
+#GLM
+#Matrice di Correlazione
+features <- setdiff(names(df), "richness")
+corr <- cor(df[, features], use = "complete.obs")
+
+highCorr <- findCorrelation(corr, cutoff = 0.8)
+df_reduced <- df[, -highCorr]
+
+
+#Modello GLM
+modello_brutto <- glm.nb(richness ~ zmean + zskew + zkurt
+                         + zq5 + zentropy + zpcum8 + zcv, 
+                         data = df)
+
+modello_glm <- glm.nb(richness ~ zskew + zkurt + zmean, data = df)
+
+vif(modello_glm)
+summary(modello_glm)
+exp(coef(modello_glm))
+
+
+AIC(modello_glm, modello_brutto)
+anova(modello_brutto, modello_glm, test = "Chisq")
+
+
+#Cross-Validation
+train_control <- trainControl(method = "cv", number = 10)
+
+mod_cv <- train(richness ~ zskew + zkurt + zmean,
+                           data = df,
+                           method = "glm.nb",
+                           trControl = train_control)
+
+mod_cv$results
