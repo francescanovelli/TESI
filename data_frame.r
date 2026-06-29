@@ -25,9 +25,6 @@ df <- data.frame(
   richness = c(32, 27, 59, 25, 33, 28, 86, 14, 47, 55, 45, 37, 19, 20, 37, 17,
                22, 45, 63, 37, 15, 16 ,37),
   metriche)
-  
-df$zentropy <- NULL
-
 
 ######### SECONDA PARTE
 
@@ -56,8 +53,6 @@ df2 <- data.frame(
   richness = c(10, 27, 42, 23, 74, 48, 44, 46, 5, 25, 25, 63, 39,
                47, 67, 63, 99, 39, 45, 43, 63, 67),
   metriche2)
-
-df2$zentropy <- NULL
 
 ######### TERZA PARTE
 
@@ -90,8 +85,3 @@ df3 <- data.frame(
                40, 41, 56, 24, 28, 66, 59, 21, 36, 32, 39, 45, 33, 29, 19, 9, 
                11, 46, 42, 48, 39, 8),
   metriche3)
-
-df3$zentropy <- NULL
-
-df <- rbind(df, df2, df3)
-write.csv(df, "metriche_3.csv", row.names = FALSE)
