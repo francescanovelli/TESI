@@ -23,7 +23,17 @@ ggplot(dati, aes(zmax, richness)) +
   theme_classic(base_size = 12)
 
 
-#GLM
+#GLM ###########################
+library(car)
+library(robustbase)
+library(corrplot)
+library(caret)
+
+df <- read.csv("metriche.csv")
+df <- df[sapply(df, is.numeric)]
+df3 <- read.csv("metriche30x30.csv")
+df3 <- df3[sapply(df, is.numeric)]
+
 #Matrice di Correlazione
 features <- setdiff(names(df), "richness")
 corr <- cor(df[, features], use = "complete.obs")
