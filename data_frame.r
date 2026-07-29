@@ -293,7 +293,10 @@ df3_10 <- data.frame(
 
 ##################################################################################################################################################################################################################
 #Data frame per albero
+
 library(dplyr)
+
+T30 <- read.csv("T30.csv")
 
 ant <- read.csv("ant.csv")
 arg <- read.csv("arg.csv")
@@ -302,9 +305,15 @@ bis <- read.csv("bis.csv")
 bon <- read.csv("bon.csv")
 bou <- read.csv("bou.csv")
 
+cav <- read.csv("cav.csv")
 cham <- read.csv("cham.csv")
+chav <- read.csv("chav.csv")
 
 dev <- read.csv("dev.csv")
+
+fuo <- read.csv("fuo.csv")
+
+gam <- read.csv("gam.csv")
 
 lori <- read.csv("lori.csv")
 
@@ -320,12 +329,18 @@ rac <- read.csv("rac.csv")
 rbi <- read.csv("rbi.csv")
 ris <- read.csv("ris.csv")
 
+sal <- read.csv("sal.csv")
 sap <- read.csv("sap.csv")
 sau <- read.csv("sau.csv")
 seys <- read.csv("seys.csv")
+sob <- read.csv("sob.csv")
+ste <- read.csv("ste.csv")
 
 tan <- read.csv("tan.csv")
 ten <- read.csv("ten.csv")
+ter <- read.csv("ter.csv")
+tru <- read.csv("tru.csv")
+
 uba <- read.csv("uba.csv")
 
 van <- read.csv("van.csv")
@@ -334,8 +349,7 @@ vcha <- read.csv("vcha.csv")
 vtn <- read.csv("vtn.csv")
 vts <- read.csv("vts.csv")
 
-
-
+#############################################################################################
 tm_ant <- bind_rows(
   ant1400 = tm_ant1400@data,
   ant1610 = tm_ant1610@data,
@@ -373,6 +387,14 @@ tm_bou <- bind_rows(
 write.csv(tm_bou, "bou.csv", row.names = FALSE)
 
 
+tm_cav <- bind_rows(
+  cav1500 = tm_cav1500@data,
+  cav1800 = tm_cav1800@data,
+  cav2200 = tm_cav2200@data,
+  .id = "plot_id")
+write.csv(tm_cav, "cav.csv", row.names = FALSE)
+
+
 tm_cham <- bind_rows(
   cham1250 = tm_cham1250@data,
   cham1470 = tm_cham1470@data,
@@ -382,10 +404,35 @@ tm_cham <- bind_rows(
 write.csv(tm_cham, "cham.csv", row.names = FALSE)
 
 
+tm_chav <- bind_rows(
+  chav1470 = tm_chav1470@data,
+  chav1720 = tm_chav1720@data,
+  chav1900 = tm_chav1920@data,
+  chav2100 = tm_chav2100@data,
+  .id = "plot_id")
+write.csv(tm_chav, "chav.csv", row.names = FALSE)
+
+
 tm_dev <- bind_rows(
   dev1500 = tm_dev1500@data,
   .id = "plot_id")
 write.csv(tm_dev, "dev.csv", row.names = FALSE)
+
+
+tm_fuo <- bind_rows(
+  fuo1900 = tm_fuo1900@data,
+  fuo2100 = tm_fuo2100@data,
+  .id = "plot_id")
+write.csv(tm_fuo, "fuo.csv", row.names = FALSE)
+
+
+tm_gam <- bind_rows(
+  gam1400 = tm_gam1400@data,
+  gam1600 = tm_gam1600@data,
+  gam1800 = tm_gam1800@data,
+  gam2000 = tm_gam2000@data,
+  .id = "plot_id")
+write.csv(tm_gam, "gam.csv", row.names = FALSE)
 
 
 tm_lori <- bind_rows(
@@ -454,6 +501,12 @@ tm_ris <- bind_rows(
 write.csv(tm_ris, "ris.csv", row.names = FALSE)
 
 
+tm_sal <- bind_rows(
+  sal2040 = tm_sal2040@data,
+  .id = "plot_id")
+write.csv(tm_sal, "sal.csv", row.names = FALSE)
+
+
 tm_sap <- bind_rows(
   sap1250 = tm_sap1250@data,
   sap1500 = tm_sap1500@data,
@@ -480,6 +533,23 @@ tm_seys <- bind_rows(
 write.csv(tm_seys, "seys.csv", row.names = FALSE)
 
 
+tm_sob <- bind_rows(
+  sob1700 = tm_sob1700@data,
+  sob2000 = tm_sob2000@data,
+  sob2100 = tm_sob2100@data,
+  .id = "plot_id")
+write.csv(tm_sob, "sob.csv", row.names = FALSE)
+
+
+tm_ste <- bind_rows(
+  ste1400 = tm_ste1400@data,
+  ste1600 = tm_ste1600@data,
+  ste1800 = tm_ste1800@data,
+  ste2000 = tm_ste2000@data,
+  .id = "plot_id")
+write.csv(tm_ste, "ste.csv", row.names = FALSE)
+
+
 tm_tan <- bind_rows(
   tan1420 = tm_tan1420@data,
   tan1700 = tm_tan1700@data,
@@ -494,6 +564,22 @@ tm_ten <- bind_rows(
   ten1890 = tm_ten1890@data,
   .id = "plot_id")
 write.csv(tm_ten, "ten.csv", row.names = FALSE)
+
+
+tm_ter <- bind_rows(
+  ter1500 = tm_ter1500@data,
+  ter1610 = tm_ter1610@data,
+  ter1900 = tm_ter1900@data,
+  ter2100 = tm_ter2100@data,
+  .id = "plot_id")
+write.csv(tm_ter, "ter.csv", row.names = FALSE)
+
+
+tm_tru <- bind_rows(
+  tru1860 = tm_tru1860@data,
+  tru2000 = tm_tru2000@data,
+  .id = "plot_id")
+write.csv(tm_tru, "tru.csv", row.names = FALSE)
 
 
 tm_uba <- bind_rows(
@@ -544,3 +630,24 @@ tm_vts <- bind_rows(
   vts1455 = tm_vts1455@data,
   .id = "plot_id")
 write.csv(tm_vts, "vts.csv", row.names = FALSE)
+
+
+######################################################################################
+dati <- rbind(as.data.frame(ant), as.data.frame(arg),
+              as.data.frame(bis), as.data.frame(bon), as.data.frame(bou),
+              as.data.frame(cav), as.data.frame(cham),  as.data.frame(chav),
+              as.data.frame(dev),
+              as.data.frame(fuo),
+              as.data.frame(gam),
+              as.data.frame(lori),
+              as.data.frame(mer), as.data.frame(mon),
+              as.data.frame(nev),
+              as.data.frame(pai), as.data.frame(pec),
+              as.data.frame(rac), as.data.frame(rbi), as.data.frame(ris),
+              as.data.frame(sap), as.data.frame(sau), as.data.frame(seys), as.data.frame(sob), as.data.frame(ste),
+              as.data.frame(tan), as.data.frame(ten), as.data.frame(ter), as.data.frame(tru),
+              as.data.frame(uba),
+              as.data.frame(van), as.data.frame(vaul), as.data.frame(vcha), as.data.frame(vtn), as.data.frame(vts))
+
+write.csv(T100, "T100.csv", row.names = FALSE)
+tm <- merge(dati, rao, by = "plot_id")
